@@ -9,6 +9,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Document
@@ -20,7 +21,7 @@ public class Student {
     @Id
     private ObjectId id;
     private String name;
-    private Date birthDate;
+    private ZonedDateTime birthDate;
     private CourseDTO course;
     private ContactDTO contact;
 
