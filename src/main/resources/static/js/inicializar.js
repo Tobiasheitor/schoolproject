@@ -4,6 +4,7 @@ $(function () {
     $('.datepicker').datepicker({
       closeOnSelect: true,
       format: "dd/mm/yyyy",
+      yearRange: [1990, 2020],
       i18n: {
         months: [
           'Janeiro',

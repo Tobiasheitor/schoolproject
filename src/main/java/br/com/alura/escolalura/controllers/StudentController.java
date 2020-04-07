@@ -1,26 +1,48 @@
 package br.com.alura.escolalura.controllers;
 
+import br.com.alura.escolalura.dto.ContactDTO;
+import br.com.alura.escolalura.dto.CourseDTO;
 import br.com.alura.escolalura.entity.Student;
+import br.com.alura.escolalura.service.StudentService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
+@Slf4j
 @Controller
 public class StudentController {
 
+    @Autowired
+    private StudentService studentService;
+
+    private final String PAGE_REGISTER = "/aluno/cadastrar";
+
     @GetMapping("/aluno/cadastrar")
     public String register(Model model) {
-        model.addAttribute("student", new Student());
-        return "/aluno/cadastrar";
+        Student student = new Student();
+        student.setContact(new ContactDTO());
+        student.setCourse(new CourseDTO());
+
+        model.addAttribute("student", student);
+        return PAGE_REGISTER;
     }
 
-    @PostMapping("/aluno/salvar")
-    public String save(@ModelAttribute Student student) {
+    @PostMapping("/student/save")
+    public String save(@ModelAttribute @Valid Student student, BindingResult bindingResult) {
+        log.info("Controller start - save student: {}", student);
 
-        //student = studentService.save(student);
+        if (bindingResult.hasErrors()) {
+            return PAGE_REGISTER;
+        }
 
-        // System.out.println("StudentController.save - Student " + student.toString());
+        student = studentService.save(student);
 
+        log.info("Controller end - saved student: {}", student);
         return "redirect:/";
     }
 
