@@ -2,7 +2,6 @@ package br.com.alura.escolalura.entity;
 
 import br.com.alura.escolalura.constants.ProjectConstants;
 import br.com.alura.escolalura.dto.ContactDTO;
-import br.com.alura.escolalura.dto.CourseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,11 +26,11 @@ public class Student {
     @NotEmpty(message = "Nome é obrigatório")
     private String name;
 
+    private String course;
+
     @NotNull
     @DateTimeFormat(pattern = ProjectConstants.DATE_PATTERN)
     private LocalDate birthDate;
-
-    private CourseDTO course;
 
     private ContactDTO contact;
 

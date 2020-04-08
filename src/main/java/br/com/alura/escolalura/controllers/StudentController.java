@@ -1,8 +1,9 @@
 package br.com.alura.escolalura.controllers;
 
 import br.com.alura.escolalura.dto.ContactDTO;
-import br.com.alura.escolalura.dto.CourseDTO;
+import br.com.alura.escolalura.entity.Course;
 import br.com.alura.escolalura.entity.Student;
+import br.com.alura.escolalura.service.CourseService;
 import br.com.alura.escolalura.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -20,15 +22,21 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private CourseService courseService;
+
     private final String PAGE_REGISTER = "/aluno/cadastrar";
 
     @GetMapping("/aluno/cadastrar")
     public String register(Model model) {
         Student student = new Student();
         student.setContact(new ContactDTO());
-        student.setCourse(new CourseDTO());
+
+        List<Course> courses = courseService.getAll();
 
         model.addAttribute("student", student);
+        model.addAttribute("courses", courses);
+
         return PAGE_REGISTER;
     }
 

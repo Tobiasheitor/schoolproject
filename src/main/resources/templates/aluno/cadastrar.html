@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
 
-    <link type="text/css" rel="stylesheet"
-          href="../materialize/css/materialize.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../materialize/css/materialize.css" media="screen,projection" />
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"/>
-    <title>EscolAlura</title>
-    <script type="text/javascript"
-            src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <title>Escola</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/inicializar.js"></script>
 
     <script type="text/javascript" src="../js/googlemaps.js"></script>
-    <link type="text/css" rel="stylesheet" href="../css/main.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/main.css" />
 </head>
+
 <body class="grey lighten-3">
 <div id="formularioEdicao" class="container">
     <h3 class="main-title center">Cadastrar Aluno</h3>
@@ -25,28 +24,36 @@
                 <h5>Dados Básicos</h5>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="nome" type="text" th:field="*{name}"/>
+                        <input id="nome" type="text" th:field="*{name}" />
                         <label for="nome">Nome</label>
-                        <span th:errors="*{name}" th:field="*{name}" th:errorclass="fieldError">Entrada inválida</span>
+                        <span th:errors="*{name}" th:field="*{name}" th:errorclass="fieldError">Entrada
+                                inválida</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="birthDate" type="text" class="datepicker" th:field="*{birthDate}"/>
+                        <input id="birthDate" type="text" class="datepicker" th:field="*{birthDate}" />
                         <label for="birthDate">Dt. Nascimento</label>
-                        <span th:errors="*{birthDate}" th:field="*{birthDate}" th:errorclass="fieldError">Entrada inválida</span>
+                        <span th:errors="*{birthDate}" th:field="*{birthDate}" th:errorclass="fieldError">Entrada
+                                inválida</span>
                     </div>
                 </div>
                 <div class="row">
+
                     <div class="input-field col s12">
-                        <input id="curso" type="text" class="validate" th:field="*{course.name}"/>
-                        <label for="curso">Curso</label>
+                        <select th:field="*{course}">
+                            <option value="">Selecione o curso</option>
+                            <option th:each="c : ${courses}" th:value="${c.name}"
+                                    th:text="${c.name}">Wireframe</option>
+                        </select>
+                        <label>curso</label>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="endereco" type="text" class="validate" th:field="*{contact.address}"/>
-                        <label for="curso">Endereco</label>
+                        <input id="endereco" type="text" class="validate" th:field="*{contact.address}" />
+                        <label for="endereco">Endereco</label>
                     </div>
                 </div>
             </div>
@@ -65,4 +72,5 @@
 <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIPw0BOFbsavl2S0XJm366GqIL8WaL4xw&amp;libraries=places&amp;callback=autoComplete"></script>
 </body>
+
 </html>

@@ -1,5 +1,7 @@
 $(function () {
 
+  $('select').formSelect();
+
   $(document).ready(function () {
     $('.datepicker').datepicker({
       closeOnSelect: true,
