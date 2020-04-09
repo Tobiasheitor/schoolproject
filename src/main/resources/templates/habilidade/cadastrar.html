@@ -6,11 +6,18 @@
 	href="../../materialize/css/materialize.min.css" media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet" />
-<title>EscolAlura</title>
+<title>Escola</title>
 <script type="text/javascript"
 		src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 </head>
 <body class="grey lighten-3">
+
+<div class="container">
+	<a href="/index.html" th:href="@{/}">
+		<i class="material-icons" style="position: fixed; left: 4%; font-size: 148px;">school</i>
+	</a>
+</div>
+
 <div id="formularioEdicao" class="container">
 	<h3 class="main-title center">Cadastrar Habilidade para <span th:text="${aluno.nome}"></span> </h3>
 		<div class="row">
@@ -39,7 +46,7 @@
 			</form>
 		</div>
 	
-	</div> <!-- Fim do formulario de edicao -->
+	</div>
 	
 	<script type="text/javascript" src="../../materialize/js/materialize.min.js"></script>
 

@@ -1,9 +1,17 @@
 @CHARSET "UTF-8";
 
-.mapa {
+.map {
 	width: 100%;
 	height: 300px
 }
 .fieldError {
     color: red;
+}
+
+i {
+    color: #03a9f4;
+}
+
+.btn {
+    background-color: #03a9f4;
 }
