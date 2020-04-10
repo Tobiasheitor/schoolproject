@@ -1,8 +1,11 @@
 function autoComplete(){
 	
-	var input = document.getElementById('endereco');
+	var input = document.getElementById('address');
+	var options = {
+      componentRestrictions: {country: "br"}
+    };
 
-	autocomplete = new google.maps.places.Autocomplete(input);
+	var autocomplete = new google.maps.places.Autocomplete(input, options);
 }
 
 function initMap() {
@@ -16,18 +19,4 @@ function initMap() {
 		scrollwheel : false,
 		zoom : 4
 	});
-	
-	for (index = 0; index < alunos.length; ++index) {
-	    var latitude = alunos[index].contato.coordinates[0];
-	    var longitude = alunos[index].contato.coordinates[1];
-	    var coordenadas = {
-	    		lat : latitude,
-	    		lng : longitude
-	    	};
-	    var marker = new google.maps.Marker({
-			position : coordenadas,
-			label: alunos[index].nome
-		});
-	    marker.setMap(map);
-	}
 }

@@ -15,3 +15,13 @@ i {
 .btn {
     background-color: #03a9f4;
 }
+
+body {
+    background-color: #e0f2f1;
+}
+
+body > div:nth-child(1) > a > i {
+    position: fixed;
+    left: 4%;
+    font-size: 148px;
+}
