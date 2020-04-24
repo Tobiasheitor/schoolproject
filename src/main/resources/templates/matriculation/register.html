@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+
+    <link type="text/css" rel="stylesheet" href="../materialize/css/materialize.css" media="screen,projection"/>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <title>Escola</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/inicializar.js"></script>
+
+    <link rel="stylesheet" href="../css/main.css"/>
+</head>
+
+<body>
+
+<div class="container">
+    <a href="/index.html" th:href="@{/}">
+        <i class="material-icons">school</i>
+    </a>
+</div>
+
+<div id="formularioEdicao" class="container">
+    <h3 class="main-title center">Criar matrícula</h3>
+    <div class="row">
+        <form class="col s12" action="#" th:action="@{/subject/save}" method="post">
+            <div class="section">
+                <h5>Selecione o curso</h5>
+
+                <div class="input-field col s12">
+                    <select th:field="*{courses}">
+                        <option value="">Selecione o curso</option>
+                        <option th:each="c : ${courses}" th:value="${c.name}"
+                                th:text="${c.name}">Wireframe
+                        </option>
+                    </select>
+                    <label>curso</label>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 center">
+                    <button class="btn" type="submit" name="action">Salvar matrícula</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="../materialize/js/materialize.min.js"></script>
+</body>
+
+</html>

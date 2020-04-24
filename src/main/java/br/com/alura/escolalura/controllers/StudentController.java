@@ -27,7 +27,7 @@ public class StudentController {
 
     private final String PAGE_REGISTER = "/aluno/cadastrar";
 
-    @GetMapping("/aluno/cadastrar")
+    @GetMapping(PAGE_REGISTER)
     public String register(Model model) {
         Student student = new Student();
         student.setContact(new ContactDTO());

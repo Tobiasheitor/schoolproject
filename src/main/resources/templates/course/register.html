@@ -9,9 +9,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <title>Escola</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/table.js"></script>
     <script type="text/javascript" src="../js/inicializar.js"></script>
 
-    <script type="text/javascript" src="../js/googlemaps.js"></script>
     <link rel="stylesheet" href="../css/main.css" />
 </head>
 
@@ -25,6 +25,7 @@
 
 <div id="formularioEdicao" class="container">
     <h3 class="main-title center">Cadastrar Curso</h3>
+
     <div class="row">
         <form class="col s12" action="#" th:action="@{/course/save}" th:object="${course}" method="post">
             <div class="section">
@@ -39,11 +40,81 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="description" type="text" th:field="*{description}" />
+                        <input id="description" type="text" th:field="*{description}"/>
                         <label for="nome">Descrição</label>
                     </div>
                 </div>
 
+            </div>
+
+            <div class="row">
+
+                <h5>Grade do Curso</h5>
+
+                <div class="row">
+                    <div class="input-field col s12 center">
+                        <button data-target="modal1" class="btn modal-trigger light-blue">Cadastrar materias</button>
+                    </div>
+                </div>
+
+                <table class="responsive-table centered">
+                    <thead>
+                    <tr>
+                        <th th:each="it : ${timetable.keySet()}" th:text="${it}" scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:each="tt : ${timetable.values()}" th:text="${tt}"></td>
+                    </tr>
+                    <tr>
+                        <td th:each="tt : ${timetable.values()}" th:text="${tt}"></td>
+                    </tr>
+                    <tr>
+                        <td th:each="tt : ${timetable.values()}" th:text="${tt}"></td>
+                    </tr>
+                    <tr>
+                        <td th:each="tt : ${timetable.values()}" th:text="${tt}"></td>
+                    </tr>
+                    <tr>
+                        <td th:each="tt : ${timetable.values()}" th:text="${tt}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <table class="responsive-table centered">
+                            <thead>
+                            <tr>
+                                <th th:each="it : ${timetable.keySet()}" th:text="${it}" scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td th:each="tt : ${timetable.values()}" th:text="${tt}"></td>
+                            </tr>
+                            <tr>
+                                <td th:each="tt : ${timetable.values()}" th:text="${tt}"></td>
+                            </tr>
+                            <tr>
+                                <td th:each="tt : ${timetable.values()}" th:text="${tt}"></td>
+                            </tr>
+                            <tr>
+                                <td th:each="tt : ${timetable.values()}" th:text="${tt}"></td>
+                            </tr>
+                            <tr>
+                                <td th:each="tt : ${timetable.values()}" th:text="${tt}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                    </div>
+                </div>
             </div>
 
             <div class="row">

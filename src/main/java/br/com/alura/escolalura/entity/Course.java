@@ -22,4 +22,5 @@ public class Course {
     @NotEmpty(message = "Nome obrigatório")
     private String name;
     private String description;
+
 }
