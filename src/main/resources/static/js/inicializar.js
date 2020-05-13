@@ -1,8 +1,8 @@
 $(function () {
 
-  $('select').formSelect();
+    $('select').formSelect();
 
-  $(document).ready(function () {
+    $(document).ready(function () {
     $('.datepicker').datepicker({
       closeOnSelect: true,
       format: "dd/mm/yyyy",
@@ -49,7 +49,8 @@ $(function () {
       }
     });
   });
-  $(document).ready(function(){
-    $('.modal').modal();
-  });
+
+    $(document).ready(function(){
+      $('.modal').modal();
+    });
 })

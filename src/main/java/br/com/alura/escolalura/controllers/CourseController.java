@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.LinkedHashMap;
 
 @Slf4j
 @Controller
@@ -26,15 +25,9 @@ public class CourseController {
 
     @GetMapping("/course/register")
     public String newCourse(Model model) {
-        LinkedHashMap<String, String> grade = new LinkedHashMap<>();
-        grade.put("segunda-feira", "-");
-        grade.put("terça-feira", "-");
-        grade.put("quarta-feira", "-");
-        grade.put("quinta-feira", "-");
-        grade.put("sexta-feira", "-");
+        Course course = new Course();
 
-        model.addAttribute("course", new Course());
-        model.addAttribute("timetable", grade);
+        model.addAttribute("newCourse", course);
 
         return PAGE_REGISTER;
     }
