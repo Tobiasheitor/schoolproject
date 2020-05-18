@@ -5,12 +5,11 @@
     <meta charset="UTF-8" />
 
     <link type="text/css" rel="stylesheet" href="../materialize/css/materialize.css" media="screen,projection" />
-
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
     <title>Escola</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/inicializar.js"></script>
-    <script type="text/javascript" src="../js/custom-modal.js"></script>
 
     <link rel="stylesheet" href="../css/main.css" />
 </head>
@@ -23,19 +22,17 @@
     </a>
 </div>
 
-<div id="formularioEdicao" class="container">
+<div class="container">
     <h3 class="main-title center">Cadastrar Curso</h3>
 
     <div class="row">
-        <form class="col s12" action="#" th:action="@{/course/save}" th:object="${newCourse}" method="post">
+        <form class="col s12" action="#" th:action="@{/course/save}" th:object="${course}" method="post">
             <div class="section">
                 <h5>Dados Básicos</h5>
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="nome" type="text" th:field="*{name}"/>
                         <label for="nome">Nome</label>
-                        <span th:errors="*{name}" th:field="*{name}" th:errorclass="fieldError">Entrada
-                                inválida</span>
                     </div>
                 </div>
                 <div class="row">
@@ -57,28 +54,51 @@
                     </div>
                 </div>
 
-                <table class="responsive-table centered">
+                <table id="view-table" class="responsive-table centered">
                     <thead>
-                    <th th:each="sb : ${newCourse.subject}" th:text="${sb.day}" scope="col"></th>
+                    <th th:each="sb : ${course.subject}" th:text="${sb.day}" scope="col"></th>
                     </thead>
                     <tbody>
                     <tr>
-                        <td th:each="sb : ${newCourse.subject}" th:text="${sb.subjectName}"></td>
+                        <td th:each="sb : ${course.subject}" th:text="${sb.subjectName}"></td>
                     </tr>
                     <tr>
-                        <td th:each="sb : ${newCourse.subject}" th:text="${sb.subjectName}"></td>
+                        <td th:each="sb : ${course.subject}" th:text="${sb.subjectName}"></td>
                     </tr>
                     <tr>
-                        <td th:each="sb : ${newCourse.subject}" th:text="${sb.subjectName}"></td>
+                        <td th:each="sb : ${course.subject}" th:text="${sb.subjectName}"></td>
                     </tr>
                     <tr>
-                        <td th:each="sb : ${newCourse.subject}" th:text="${sb.subjectName}"></td>
+                        <td th:each="sb : ${course.subject}" th:text="${sb.subjectName}"></td>
                     </tr>
                     <tr>
-                        <td th:each="sb : ${newCourse.subject}" th:text="${sb.subjectName}"></td>
+                        <td th:each="sb : ${course.subject}" th:text="${sb.subjectName}"></td>
                     </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+
+                    <table class="responsive-table centered">
+                        <thead>
+                        <th scope="col">Dia da semana</th>
+                        <th scope="col">Matéria</th>
+                        </thead>
+                        <tbody id="modal-table">
+                        <tr th:each="subject, itemStat : ${course.subject}">
+                            <td th:text="${course.subject[__${itemStat.index}__].day}"></td>
+                            <td><input type="text" class="inputFields"
+                                       th:field="*{subject[__${itemStat.index}__].subjectName}"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Salvar</a>
+                </div>
             </div>
 
             <div class="row">
@@ -89,33 +109,37 @@
         </form>
     </div>
 
-    <div class="row">
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-
-                <table class="responsive-table centered">
-                    <thead>
-                    <th scope="col">Dia da semana</th>
-                    <th scope="col">Matéria</th>
-                    </thead>
-                    <tbody>
-                    <tr th:each="subject, itemStat : *{newCourse.subject}">
-                        <td th:text="*{newCourse.subject[__${itemStat.index}__].day}"></td>
-                        <td><input th:field="*{newCourse.subject[__${itemStat.index}__].subjectName}"/></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-            </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Salvar</a>
-            </div>
-        </div>
-    </div>
-
 </div>
 
 <script type="text/javascript" src="../materialize/js/materialize.min.js"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+        var data = [];
+
+        setTimeout(function(){
+            $('#modal1').modal({
+                onCloseEnd: function() {
+                    $('.inputFields').each(function(){
+                        data.push($(this).val());
+                    });
+
+                    $('#view-table > tbody').empty();
+                    for (var i = 0; i < 5; i++) {
+                        var temp = 0;
+                        $('#view-table > tbody').append('<tr><td>' + data[temp++] + '</td>' + '<td>' + data[temp++] + '</td>' +
+                        '<td>' + data[temp++] + '</td>' + '<td>' + data[temp++] + '</td>' + '<td>' + data[temp++] + '</td></tr>');
+                    }
+
+                    data = [];
+                }
+            });
+        }, 500);
+
+    /*]]>*/
+
+</script>
 
 </body>
 

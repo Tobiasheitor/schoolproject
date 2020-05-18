@@ -17,7 +17,7 @@
 	</a>
 </div>
 
-<div id="formularioEdicao" class="container">
+<div class="container">
 	<h3 class="main-title center">Cadastrar Nota para <span th:text="${aluno.nome}"></span></h3>
 	<div class="row">
 		<form class="col s12" action="#" th:action="@{'/nota/salvar/' + ${aluno.id}}" th:object="${nota}"
@@ -26,7 +26,7 @@
 				<h5>Notas</h5>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="valor" type="number" class="validate" th:value="${valor}" name="valor" />
+						<input id="valor" type="number" class="validate" th:value="${valor}" name="valor"/>
 						<label for="valor">Nota</label>
 					</div>
 				</div>

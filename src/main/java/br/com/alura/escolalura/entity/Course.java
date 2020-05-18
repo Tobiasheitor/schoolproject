@@ -18,7 +18,7 @@ import java.util.List;
 @Data
 public class Course {
 
-    private static final String DEFAULT_NAME = "-";
+    private static final String DEFAULT_NAME = "";
 
     @Id
     private ObjectId id;

@@ -27,7 +27,7 @@ public class CourseController {
     public String newCourse(Model model) {
         Course course = new Course();
 
-        model.addAttribute("newCourse", course);
+        model.addAttribute("course", course);
 
         return PAGE_REGISTER;
     }
