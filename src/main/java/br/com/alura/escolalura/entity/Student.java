@@ -34,5 +34,7 @@ public class Student {
 
     private ContactDTO contact;
 
+    private boolean matriculate;
+
 }
 

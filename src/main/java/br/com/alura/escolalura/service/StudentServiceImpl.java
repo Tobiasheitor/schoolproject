@@ -21,6 +21,7 @@ public class StudentServiceImpl implements StudentService {
         log.info("Service start - save student: {}", student);
         Student result;
 
+        student.setMatriculate(false);
         result = studentRepository.save(student);
 
         log.debug("Service end - saved student: {}", result);
