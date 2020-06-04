@@ -2,7 +2,10 @@ package br.com.alura.escolalura.entity;
 
 import br.com.alura.escolalura.constants.ProjectConstants;
 import br.com.alura.escolalura.dto.ContactDTO;
+import java.time.LocalDate;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
@@ -11,12 +14,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
-
 @Document
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 public class Student {
 
@@ -34,7 +35,9 @@ public class Student {
 
     private ContactDTO contact;
 
-    private boolean matriculate;
+    public Student() {
+        this.contact = new ContactDTO();
+    }
 
 }
 

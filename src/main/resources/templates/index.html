@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Sistema escolar</title>
 
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
@@ -16,15 +16,7 @@
 <h1 class="main-title center">Bem vindo ao Sistema de Escola</h1>
 
 <div class="row center">
-    <a href="aluno/cadastrar">
-        <div class="col s12 m4 l4  waves-effect waves-light ">
-            <div class="card-panel hoverable z-depth-1 center grey lighten-4">
-                <i class="large material-icons">perm_identity </i>
-                <div class="truncate">Cadastrar Alunos</div>
-            </div>
-        </div>
-    </a>
-    <a href="course/register">
+    <a href="course/register" th:href="@{course/register}">
         <div class="col s12 m4 l4  waves-effect waves-light ">
             <div class="card-panel hoverable z-depth-1 center grey lighten-4">
                 <i class="large material-icons">library_books</i>
@@ -32,7 +24,15 @@
             </div>
         </div>
     </a>
-    <a href="/aluno/listar">
+    <a href="aluno/cadastrar" th:href="@{aluno/cadastrar}">
+        <div class="col s12 m4 l4  waves-effect waves-light ">
+            <div class="card-panel hoverable z-depth-1 center grey lighten-4">
+                <i class="large material-icons">perm_identity </i>
+                <div class="truncate">Cadastrar Alunos</div>
+            </div>
+        </div>
+    </a>
+    <a href="aluno/listar" th:href="@{aluno/listar}">
         <div class="col s12 m4 l4  waves-effect waves-light ">
             <div class="card-panel hoverable z-depth-1 center grey lighten-4">
                 <i class="large material-icons ">search </i>
@@ -40,7 +40,7 @@
             </div>
         </div>
     </a>
-    <a href="/teacher/register">
+    <a href="teacher/register" th:href="@{teacher/register}">
         <div class="col s12 m4 l4  waves-effect waves-light ">
             <div class="card-panel hoverable z-depth-1 center grey lighten-4">
                 <i class="large material-icons">person_add</i>
@@ -48,19 +48,19 @@
             </div>
         </div>
     </a>
-    <a href="/matriculation/register">
-        <div class="col s12 m4 l4  waves-effect waves-light ">
-            <div class="card-panel hoverable z-depth-1 center grey lighten-4">
-                <i class="large material-icons">create_new_folder</i>
-                <div class="truncate">Nova matrícula</div>
-            </div>
-        </div>
-    </a>
-    <a href="/geolocalizacao/iniciarpesquisa">
+    <a href="geolocalizacao/iniciarpesquisa" th:href="@{geolocalizacao/iniciarpesquisa}">
         <div class="col s12 m4 l4  waves-effect waves-light ">
             <div class="card-panel hoverable z-depth-1 center grey lighten-4">
                 <i class="large material-icons ">my_location</i>
                 <div class="truncate">Pesquisar por Geolocalizacao</div>
+            </div>
+        </div>
+    </a>
+    <a href="nota/cadastrar" th:href="@{nota/cadastrar}">
+        <div class="col s12 m4 l4  waves-effect waves-light ">
+            <div class="card-panel hoverable z-depth-1 center grey lighten-4">
+                <i class="large material-icons">input</i>
+                <div class="truncate">Lançar notas</div>
             </div>
         </div>
     </a>
