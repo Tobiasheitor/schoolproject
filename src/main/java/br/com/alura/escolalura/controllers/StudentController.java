@@ -1,7 +1,10 @@
 package br.com.alura.escolalura.controllers;
 
+import br.com.alura.escolalura.dto.ModelStudent;
+import br.com.alura.escolalura.dto.TesteDTO;
 import br.com.alura.escolalura.entity.Course;
 import br.com.alura.escolalura.entity.Student;
+import br.com.alura.escolalura.repository.StudentRepository;
 import br.com.alura.escolalura.service.CourseService;
 import br.com.alura.escolalura.service.StudentService;
 import java.util.List;
@@ -23,32 +26,54 @@ public class StudentController {
     private StudentService studentService;
 
     @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
     private CourseService courseService;
 
-    private final String PAGE_REGISTER = "/aluno/cadastrar";
-    private final String PAGE_NOTE_REGISTER = "/nota/cadastrar";
+    private static final String PAGE_REGISTER = "/aluno/cadastrar";
+    private static final String PAGE_NOTE_REGISTER = "/nota/cadastrar";
+    private static final String PAGE_NOTE_SAVE = "/note/save";
 
     @GetMapping(PAGE_REGISTER)
     public String register(Model model) {
-        Student student = new Student();
+        ModelStudent modelStudent = new ModelStudent();
 
         List<Course> courses = courseService.getAll();
 
-        model.addAttribute("student", student);
+        model.addAttribute("student", modelStudent);
         model.addAttribute("courses", courses);
 
         return PAGE_REGISTER;
     }
 
     @PostMapping("/student/save")
-    public String save(@ModelAttribute @Valid Student student, BindingResult bindingResult) {
-        log.info("Controller start - save student: {}", student);
+    public String save(@ModelAttribute @Valid ModelStudent modelStudent, BindingResult bindingResult) {
+        log.info("Controller start - save student: {}", modelStudent);
 
         if (bindingResult.hasErrors()) {
             return PAGE_REGISTER;
         }
 
-        studentService.save(student);
+        Student studentSaved = studentService.save(modelStudent);
+
+        log.info("StudentController.save end - student {}", studentSaved);
+        return "redirect:/";
+    }
+
+    @GetMapping(PAGE_NOTE_REGISTER)
+    public String registerNotes(Model model) {
+        log.info("Controller.registerNotes start");
+
+        model.addAttribute("courses", courseService.getAll());
+        model.addAttribute("teste", new TesteDTO());
+
+        return PAGE_NOTE_REGISTER;
+    }
+
+    @PostMapping(PAGE_NOTE_SAVE)
+    public String saveNote(@ModelAttribute TesteDTO teste) {
+        log.info("Controller saveNote start - save teste: {}", teste);
 
         return "redirect:/";
     }

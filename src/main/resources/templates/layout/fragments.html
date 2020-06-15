@@ -11,5 +11,16 @@
     </a>
 </div>
 
+<div th:fragment="select_student" th:unless="${#lists.isEmpty(students)}">
+    <div class="row" id="div_student_select">
+        <div class="input-field col s12">
+            <select id="select_student">
+                <option value="">Selecione o estudante</option>
+                <option th:each="s : ${students}" th:value="${s.id}" th:text="${s.name}">Wireframe</option>
+            </select>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

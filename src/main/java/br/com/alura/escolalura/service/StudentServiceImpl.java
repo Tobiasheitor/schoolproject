@@ -1,9 +1,12 @@
 package br.com.alura.escolalura.service;
 
+import br.com.alura.escolalura.dto.ModelStudent;
 import br.com.alura.escolalura.entity.Course;
 import br.com.alura.escolalura.entity.Student;
 import br.com.alura.escolalura.repository.CourseRepository;
+import br.com.alura.escolalura.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,17 +14,26 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
-    private CourseRepository courseRepository;
+  @Autowired
+  private CourseRepository courseRepository;
 
-    @Override
-    public void save(Student student) {
-        log.info("Service start - save student: {}", student);
+  @Autowired
+  private StudentRepository studentRepository;
 
-        Course course = courseRepository.findByName(student.getCourse());
-        course.getStudents().add(student);
+  @Autowired
+  private ModelMapper modelMapper;
 
-        courseRepository.save(course);
-    }
+  @Override
+  public Student save(ModelStudent modelStudent) {
+    log.info("Service start - save student: {}", modelStudent);
+
+    Student studentSaved = studentRepository.save(modelMapper.map(modelStudent, Student.class));
+
+    Course course = courseRepository.findOne(modelStudent.getCourseId());
+    course.getStudents().add(studentSaved.getId());
+    courseRepository.save(course);
+
+    return studentSaved;
+  }
 
 }

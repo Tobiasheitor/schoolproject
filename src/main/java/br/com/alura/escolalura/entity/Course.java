@@ -1,15 +1,12 @@
 package br.com.alura.escolalura.entity;
 
-import br.com.alura.escolalura.constants.Days;
-import br.com.alura.escolalura.dto.SubjectDTO;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.bson.types.ObjectId;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,30 +15,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Builder
 @Data
-public class Course {
+public class Course implements Serializable {
 
-    private static final String DEFAULT_NAME = "";
+  private static final long serialVersionUID = -6145184211921150731L;
+  private static final String DEFAULT_NAME = "";
 
-    @Id
-    private ObjectId id;
+  @Id
+  private ObjectId id;
 
   @Indexed(unique = true)
-  @NotEmpty(message = "Nome obrigatório")
   private String name;
-
   private String description;
-
-  private List<SubjectDTO> subject;
-
-  private List<Student> students;
+  private List<ObjectId> subjects;
+  private List<ObjectId> students;
 
   public Course() {
-    this.subject = Arrays.asList(
-        new SubjectDTO(Days.MONDAY, DEFAULT_NAME),
-        new SubjectDTO(Days.TUESDAY, DEFAULT_NAME),
-        new SubjectDTO(Days.WEDNESDAY, DEFAULT_NAME),
-        new SubjectDTO(Days.THURSDAY, DEFAULT_NAME),
-        new SubjectDTO(Days.FRIDAY, DEFAULT_NAME));
+    this.subjects = new ArrayList<>();
     this.students = new ArrayList<>();
   }
+
 }

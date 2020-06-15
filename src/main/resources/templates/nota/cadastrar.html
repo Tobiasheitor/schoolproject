@@ -2,11 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8" />
-	<link type="text/css" rel="stylesheet" href="../../materialize/css/materialize.min.css" media="screen,projection" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<meta charset="UTF-8"/>
+
 	<title>Escola</title>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+	<link type="text/css" rel="stylesheet" href="../../materialize/css/materialize.min.css" th:href="@{/materialize/css/materialize.min.css}"
+				media="screen,projection"/>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+	<link rel="stylesheet" href="../css/main.css"/>
 </head>
 
 <body class="grey lighten-3">
@@ -16,22 +19,28 @@
 <div class="container">
 	<h3 class="main-title center">Cadastrar Nota</h3>
 	<div class="row">
-		<form class="col s12" action="#" method="post">
+		<form class="col s12" action="#" method="post" th:action="@{/note/save}" th:object="${teste}" enctype="multipart/form-data">
 
 			<div class="row">
 				<div class="input-field col s12">
-					<select>
+					<select id="select_course" th:field="*{nomeDoCurso}">
 						<option value="">Selecione o curso</option>
-						<option th:each="c : ${courses}" th:value="${c.name}"
-										th:text="${c.name}">Wireframe
-						</option>
+						<option th:each="c : ${courses}" th:value="${c.id}" th:text="${c.name}">Wireframe</option>
 					</select>
 					<label>curso</label>
 				</div>
 			</div>
 
-			<p th:text="${courses}"></p>
-			<p th:text="*{course}"></p>
+			<div id="resultsBlock"></div>
+
+			<div class="row" id="div_student_select" style="display:none;">
+				<div class="input-field col s12">
+					<select id="select_student" th:field="*{student.name}">
+						<option value="">Selecione o estudante</option>
+					</select>
+					<label>estudante</label>
+				</div>
+			</div>
 
 			<div class="row">
 				<div class="input-field col s12 center">
@@ -39,12 +48,74 @@
 					</button>
 				</div>
 			</div>
+
+			<div class="row">
+				<table id="notes_table" class="responsive-table centered">
+					<thead>
+					<th scope="col">Matéria</th>
+					<th scope="col">Semestre 1</th>
+					<th scope="col">Semestre 2</th>
+					<th scope="col">Exame (opcional)</th>
+					</thead>
+					<tbody>
+					<tr>
+						<!-- dynamic content -->
+					</tr>
+					</tbody>
+				</table>
+			</div>
+
 		</form>
 	</div>
 
 </div>
 
-<script type="text/javascript" src="../../materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"
+				th:src="@{https://code.jquery.com/jquery-2.1.1.min.js}"></script>
+<script type="text/javascript" src="../../materialize/js/materialize.min.js" th:src="@{/materialize/js/materialize.min.js}"></script>
+<script type="text/javascript" src="../js/inicializar.js"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+				$('#select_course').change(function() {
+					var course_id = $('#select_course').val();
+					if (course_id) {
+						var url = '/course/' + course_id + '/students';
+						$("#resultsBlock").load(url, function() {
+							$('select').formSelect();
+						});
+					}
+				})
+
+				$('#select_student').change(function() {
+					var value = $('#select_student').val();
+					if (value) {
+						if (selected_course) {
+							if (selected_course.students) {
+								var student_data = selected_course.students.filter(student => student.name === value);
+								if (student_data && student_data[0].subjects.length > 0) {
+									var subjects = student_data[0].subjects.filter(subject => subject.subjectName);
+									$('#notes_table > tbody').empty();
+									subjects.forEach(subject => {
+
+										var row = $('<tr>');
+										row.append( $('<td>').text(subject.subjectName) );
+										row.append($('<td>').append($('<input name="note" class="my_notes" type="number"/>')));
+        						$('#notes_table > tbody').append(row);
+
+									});
+								}
+
+							}
+						}
+					}
+				})
+
+    /*]]>*/
+
+
+</script>
 
 </body>
 

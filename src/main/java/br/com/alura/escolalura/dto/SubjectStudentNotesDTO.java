@@ -2,16 +2,17 @@ package br.com.alura.escolalura.dto;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
-public class SubjectDTO {
+public class SubjectStudentNotesDTO {
 
-  private ObjectId subjectId;
+  private String subjectName;
   private List<Double> notes;
 
 }
