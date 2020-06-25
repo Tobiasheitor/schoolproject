@@ -1,7 +1,5 @@
 package br.com.alura.escolalura.entity;
 
-import br.com.alura.escolalura.dto.ContactDTO;
-import br.com.alura.escolalura.dto.SubjectDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,22 +8,21 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.io.Serializable;
+
 
 @Document
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
-public class Student {
+public class Subject implements Serializable {
+
+    private static final long serialVersionUID = -8782046828386962196L;
 
     @Id
-    private ObjectId id;
+    private ObjectId subjectId;
     private String name;
-    private LocalDate birthDate;
-    private List<SubjectDTO> subjects;
-    private ContactDTO contact;
+    private String dayOfWeek;
 
 }
-
