@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +45,11 @@ public class StudentServiceImpl implements StudentService {
     Course course = courseRepository.findById(modelStudent.getCourseId()).get();
 
     Iterable<Subject> subjects = subjectRepository.findAllById(course.getSubjects());
-    subjects.forEach(sub -> subjectDTOList.add(modelMapper.map(sub, SubjectDTO.class)));
+    subjects.forEach(sub -> {
+      SubjectDTO mapped = modelMapper.map(sub, SubjectDTO.class);
+      mapped.setNotes(Arrays.asList("", "", ""));
+      subjectDTOList.add(mapped);
+    });
     studentTemp.setSubjects(subjectDTOList);
 
     Student studentSaved = studentRepository.save(studentTemp);

@@ -1,10 +1,11 @@
 package br.com.alura.escolalura.dto;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,6 +14,6 @@ import lombok.NoArgsConstructor;
 public class SubjectStudentNotesDTO {
 
   private String subjectName;
-  private List<Double> notes;
+  private List<String> notes;
 
 }

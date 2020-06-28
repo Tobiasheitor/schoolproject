@@ -19,11 +19,11 @@
 <div class="container">
 	<h3 class="main-title center">Cadastrar Nota</h3>
 	<div class="row">
-		<form class="col s12" action="#" method="post" th:action="@{/note/save}" th:object="${teste}" enctype="multipart/form-data">
+		<form class="col s12" action="/note/save" method="post" id="myForm">
 
 			<div class="row">
 				<div class="input-field col s12">
-					<select id="select_course" th:field="*{nomeDoCurso}">
+					<select id="select_course">
 						<option value="">Selecione o curso</option>
 						<option th:each="c : ${courses}" th:value="${c.id}" th:text="${c.name}">Wireframe</option>
 					</select>
@@ -31,13 +31,8 @@
 				</div>
 			</div>
 
-			<div id="resultsBlock"></div>
-
-			<div class="row">
-				<div class="input-field col s12 center">
-					<button class="btn waves-effect waves-light" type="submit" name="action">Salvar Notas
-					</button>
-				</div>
+			<div id="resultsBlock">
+				<!-- dynamic content -->
 			</div>
 
 			<div class="row">
@@ -56,6 +51,13 @@
 				</table>
 			</div>
 
+			<div class="row">
+				<div class="input-field col s12 center">
+					<button class="btn waves-effect waves-light" type="submit" name="action">Salvar Notas
+					</button>
+				</div>
+			</div>
+
 		</form>
 	</div>
 
@@ -69,24 +71,55 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
 
-				$('#select_course').change(function() {
-					var course_id = $('#select_course').val();
-					if (course_id) {
-						var url = '/course/' + course_id + '/students';
-						$("#resultsBlock").load(url, function() {
-							$('select').formSelect();
-							$('#select_student').change(function() {
-								var student = $('#select_student').val();
-								if (student) {
-									var url_notes = '/student/' + student + '/subjects';
-									$('#table_content').load(url_notes);
-								}
-							})
-						});
-					}
-				})
+		$('#select_course').change(function() {
+			var course_id = $('#select_course').val();
+			if (course_id) {
+				var url = '/course/' + course_id + '/students';
+				$("#resultsBlock").load(url, function() {
+					$('select').formSelect();
+					$('#select_student').change(function() {
+						var student = $('#select_student').val();
+						if (student) {
+							var url_notes = '/student/' + student + '/subjects';
+							$('#table_content').load(url_notes);
+						}
+					})
+				});
+			}
+		})
 
+		$("#myForm").submit(function(event) {
+			event.preventDefault();
+			var subjects = [];
+			var notes = [];
+			$(".subject_name").each(function( index ) {
+			  subjects.push($( this ).text());
+			});
 
+			$(".note_value").each(function( index ) {
+			  notes.push($( this ).val());
+			});
+
+			$.ajax({
+			  url: $("#myForm").attr( 'action' ),
+			  type:"POST",
+			  data: JSON.stringify({
+					course: $('#select_course').val(),
+					students: $('#select_student').val(),
+					subjects: subjects,
+					notes: notes
+				}),
+			  contentType:"application/json; charset=utf-8",
+			  dataType:"json",
+			  success: function() {
+				console.log("post realizado");
+			  },
+			  complete: function () {
+				document.location.href="/";
+			  },
+			});
+
+		});
 
     /*]]>*/
 

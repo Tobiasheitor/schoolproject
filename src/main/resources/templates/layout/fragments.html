@@ -25,8 +25,9 @@
 
 <div th:fragment="input_notes" th:unless="${#lists.isEmpty(notes)}">
     <tr th:each="note : ${notes}">
-        <td th:text="*{note.subjectName}"></td>
-
+        <td class="subject_name" th:text="*{note.subjectName}">
+        <td th:each="value : *{note.notes}"><input class="note_value" type="text" style="text-align: center;"
+                                                   th:value="*{value}"/></td>
     </tr>
 </div>
 
