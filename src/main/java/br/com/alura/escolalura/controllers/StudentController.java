@@ -19,7 +19,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -79,7 +78,9 @@ public class StudentController {
 
     @PostMapping(PAGE_NOTE_SAVE)
     public ResponseEntity<String> saveNote(@RequestBody CreateUserDTO createUserDTO) {
-        log.info("{}", createUserDTO);
+        log.info("StudentController.saveNote - Start - createUserDTO {}", createUserDTO);
+
+        studentService.saveNotes(createUserDTO);
 
         return ResponseEntity.status(HttpStatus.OK).body("Success");
     }
@@ -90,8 +91,6 @@ public class StudentController {
 
         List<SubjectStudentNotesDTO> studentSubjects = studentService.getStudentSubjects(studentId);
 
-        studentSubjects.get(0).setNotes(Arrays.asList("2.0", "3.5", ""));
-        studentSubjects.get(1).setNotes(Arrays.asList("2.0", "3.5", ""));
         model.addAttribute("notes", studentSubjects);
 
         return INPUT_NOTES_FRAGMENT;

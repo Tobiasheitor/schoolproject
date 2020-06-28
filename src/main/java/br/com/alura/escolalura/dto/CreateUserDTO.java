@@ -12,7 +12,7 @@ import java.util.List;
 public class CreateUserDTO {
 
     private String course;
-    private String students;
+    private String student;
     private List<String> subjects;
     private List<String> notes;
 

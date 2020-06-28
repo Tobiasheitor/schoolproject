@@ -5,4 +5,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface SubjectRepository extends MongoRepository<Subject, ObjectId> {
+
+    Subject findByName(String name);
+
 }
