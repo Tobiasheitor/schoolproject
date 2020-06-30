@@ -18,7 +18,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class AdminService {
+public class AdminServiceImpl {
 
     @Autowired
     private CourseRepository courseRepository;
@@ -55,8 +55,8 @@ public class AdminService {
         return closures;
     }
 
-    private List<String> calculateFinalNotes(List<SubjectDTO> subjects) {
-        List<String> response = new ArrayList<>();
+    private List<Double> calculateFinalNotes(List<SubjectDTO> subjects) {
+        List<Double> response = new ArrayList<>();
 
         subjects.forEach(subjectDTO -> {
             response.add(calculateAverage(subjectDTO.getNotes()));
@@ -65,11 +65,11 @@ public class AdminService {
         return response;
     }
 
-    private String calculateAverage(List<String> notes) {
+    private Double calculateAverage(List<String> notes) {
         long count = notes.stream().filter(n -> !n.isEmpty()).count();
         double value = notes.stream().filter(n -> !n.isEmpty()).mapToDouble(Double::parseDouble).sum();
 
-        return String.valueOf(value / count);
+        return (value / count);
     }
 
 }

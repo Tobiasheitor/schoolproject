@@ -1,6 +1,6 @@
 package br.com.alura.escolalura.controllers;
 
-import br.com.alura.escolalura.service.AdminService;
+import br.com.alura.escolalura.service.AdminServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ public class AdminController {
 	private static final String PAGE_CLOSURE = "/closure";
 
 	@Autowired
-	private AdminService adminService;
+	private AdminServiceImpl adminService;
 
 	@GetMapping("/")
 	public String index() {

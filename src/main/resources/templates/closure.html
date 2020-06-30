@@ -21,6 +21,30 @@
 <div class="container">
     <h3 class="main-title center">Fechamento</h3>
 
+    <div th:each="c : ${closure}">
+        <h4 th:text=*{c.course}></h4>
+
+        <br>
+        <p>Média final dos alunos</p>
+
+        <table class="responsive-table centered">
+            <thead>
+            <th scope="col">Aluno/Materias</th>
+            <th th:each="sb : *{c.subjects}" th:text="*{sb}" scope="col"></th>
+            </thead>
+            <tbody>
+            <tr th:each="sd : *{c.studentData}">
+                <td th:text="*{sd.studentName}"></td>
+
+                <td th:each="n : *{sd.notes}" th:text="${#numbers.formatDecimal(n,1,1)}"
+                    th:style="${n == 'NaN'} or ${n &gt; 6.0} ? 'background-color:#8dff80' : 'background-color:#ff8787'"></td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
 
 </div>
 

@@ -1,9 +1,6 @@
 package br.com.alura.escolalura.service;
 
-import br.com.alura.escolalura.dto.CreateUserDTO;
-import br.com.alura.escolalura.dto.ModelStudent;
-import br.com.alura.escolalura.dto.SubjectDTO;
-import br.com.alura.escolalura.dto.SubjectStudentNotesDTO;
+import br.com.alura.escolalura.dto.*;
 import br.com.alura.escolalura.entity.Course;
 import br.com.alura.escolalura.entity.Student;
 import br.com.alura.escolalura.entity.Subject;
@@ -42,7 +39,7 @@ public class StudentServiceImpl implements StudentService {
     public Student save(ModelStudent modelStudent) {
         log.info("Service start - save student: {}", modelStudent);
         List<SubjectDTO> subjectDTOList = new ArrayList<>();
-        Student studentTemp = modelMapper.map(modelStudent, Student.class);
+        Student studentTemp = new Student(null, modelStudent.getName(), modelStudent.getBirthDate(), null, new ContactDTO(modelStudent.getContact().getAddress()));
 
         Course course = courseRepository.findById(modelStudent.getCourseId()).get();
 

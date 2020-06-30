@@ -12,6 +12,6 @@ import java.util.List;
 public class SubjectStudentInfoDTO {
 
     String studentName;
-    List<String> notes;
+    List<Double> notes;
 
 }
