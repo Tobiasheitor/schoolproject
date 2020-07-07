@@ -21,4 +21,7 @@ public interface StudentService {
     Student getStudent(String id);
 
     void editStudent(EditStudent editStudent);
+
+    void deleteStudent(String id);
+
 }

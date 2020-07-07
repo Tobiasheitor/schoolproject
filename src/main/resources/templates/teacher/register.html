@@ -9,11 +9,13 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <title>Escola</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/inicializar.js"></script>
 
+    <script type="text/javascript" src="../js/googlemaps.js"></script>
     <link type="text/css" rel="stylesheet" href="../css/main.css"/>
 </head>
 
-<body>
+<body class="teal lighten-5">
 
 <div th:replace="layout/fragments :: menu"></div>
 
@@ -33,6 +35,25 @@
                     </div>
                 </div>
 
+                <div class="row">
+
+                    <div class="input-field col s12">
+                        <select th:field="*{courseId}">
+                            <option value="">Selecione o curso</option>
+                            <option th:each="c : ${courses}" th:value="${c.id}"
+                                    th:text="${c.name}">Wireframe
+                            </option>
+                        </select>
+                        <label>curso</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="endereco" type="text" class="validate" th:field="*{address}"/>
+                        <label for="endereco">Endereco</label>
+                    </div>
+                </div>
             </div>
 
             <div class="row">

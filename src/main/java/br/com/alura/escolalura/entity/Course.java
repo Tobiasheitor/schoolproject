@@ -29,10 +29,12 @@ public class Course implements Serializable {
   private String description;
   private List<ObjectId> subjects;
   private List<ObjectId> students;
+  private List<ObjectId> teachers;
 
   public Course() {
     this.subjects = new ArrayList<>();
     this.students = new ArrayList<>();
+    this.teachers = new ArrayList<>();
   }
 
 }

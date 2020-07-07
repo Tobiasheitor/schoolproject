@@ -126,6 +126,22 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.save(student);
     }
 
+    @Override
+    public void deleteStudent(String id) {
+        List<Course> allCourses = courseRepository.findAll();
+
+        Student student = studentRepository.findById(new ObjectId(id)).get();
+        Course course = allCourses.stream().filter(c -> c.getStudents().contains(student.getId())).findFirst().get();
+
+        List<ObjectId> courseStudents = course.getStudents();
+        courseStudents.remove(student.getId());
+
+        course.setStudents(courseStudents);
+
+        courseRepository.save(course);
+        studentRepository.delete(student);
+    }
+
     private Subject findSubjectByName(String name) {
         return subjectRepository.findByName(name);
     }

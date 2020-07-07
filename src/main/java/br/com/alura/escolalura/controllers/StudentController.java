@@ -7,7 +7,6 @@ import br.com.alura.escolalura.repository.StudentRepository;
 import br.com.alura.escolalura.service.CourseService;
 import br.com.alura.escolalura.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -133,7 +132,7 @@ public class StudentController {
     public String delete(@PathVariable("studentId") String studentId) {
         log.info("StudentController.delete - Start - studentId {}", studentId);
 
-        studentRepository.deleteById(new ObjectId(studentId));
+        studentService.deleteStudent(studentId);
 
         log.info("StudentController.delete - End - studentId {}", studentId);
 
