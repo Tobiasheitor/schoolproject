@@ -100,6 +100,32 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.save(student);
     }
 
+    @Override
+    public List<Student> getAllStudents() {
+
+        List<Student> allStudents = studentRepository.findAll();
+
+        return allStudents;
+    }
+
+    @Override
+    public Student getStudent(String id) {
+
+        Optional<Student> student = studentRepository.findById(new ObjectId(id));
+
+        return student.get();
+    }
+
+    @Override
+    public void editStudent(EditStudent editStudent) {
+        Student student = studentRepository.findById(new ObjectId(editStudent.getStudentId())).get();
+        student.setName(editStudent.getName());
+        student.setBirthDate(editStudent.getBirthDate());
+        student.setContact(new ContactDTO(editStudent.getAddress()));
+
+        studentRepository.save(student);
+    }
+
     private Subject findSubjectByName(String name) {
         return subjectRepository.findByName(name);
     }

@@ -29,3 +29,7 @@ body > div:nth-child(1) > a > i {
 .highlighted {
     background-color: #b3e5fc;
 }
+
+.input-field input[type=text]:focus + label {
+     color: #000;
+}

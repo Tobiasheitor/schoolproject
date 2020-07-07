@@ -37,7 +37,7 @@
                 <td th:text="*{sd.studentName}"></td>
 
                 <td th:each="n : *{sd.notes}" th:text="${#numbers.formatDecimal(n,1,1)}"
-                    th:style="${n == 'NaN'} or ${n &gt; 6.0} ? 'background-color:#8dff80' : 'background-color:#ff8787'"></td>
+                    th:style="${n == 'NaN'} or ${n &gt; 60} ? 'background-color:#8dff80' : 'background-color:#ff8787'"></td>
             </tr>
 
             </tbody>
