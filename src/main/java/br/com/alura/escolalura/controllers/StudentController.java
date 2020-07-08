@@ -125,7 +125,7 @@ public class StudentController {
 
         studentService.editStudent(editStudent);
 
-        return "redirect:/";
+        return "redirect:" + PAGE_MANAGE;
     }
 
     @DeleteMapping(STUDENT_DELETE)

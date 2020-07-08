@@ -36,20 +36,26 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="birthDate" type="text" class="datepicker" th:field="*{birthDate}" />
+                        <input id="birthDate" type="text" class="datepicker" th:field="*{birthDate}"/>
                         <label for="birthDate">Dt. Nascimento</label>
                         <span th:errors="*{birthDate}" th:field="*{birthDate}" th:errorclass="fieldError">Entrada
                                 inválida</span>
                     </div>
                 </div>
                 <div class="row">
+                    <div class="input-field col s12">
+                        <input id="sponsor" type="text" th:field="*{sponsor}"/>
+                        <label for="nome">Nome do responsável</label>
+                    </div>
+                </div>
 
+                <div class="row">
                     <div class="input-field col s12">
                         <select th:field="*{courseId}">
-                          <option value="">Selecione o curso</option>
-                          <option th:each="c : ${courses}" th:value="${c.id}"
-                                  th:text="${c.name}">Wireframe
-                          </option>
+                            <option value="">Selecione o curso</option>
+                            <option th:each="c : ${courses}" th:value="${c.id}"
+                                    th:text="${c.name}">Wireframe
+                            </option>
                         </select>
                         <label>curso</label>
                     </div>

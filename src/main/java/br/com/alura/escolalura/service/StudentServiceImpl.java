@@ -39,7 +39,7 @@ public class StudentServiceImpl implements StudentService {
     public Student save(ModelStudent modelStudent) {
         log.info("Service start - save student: {}", modelStudent);
         List<SubjectDTO> subjectDTOList = new ArrayList<>();
-        Student studentTemp = new Student(null, modelStudent.getName(), modelStudent.getBirthDate(), null, new ContactDTO(modelStudent.getContact().getAddress()));
+        Student studentTemp = new Student(null, modelStudent.getName(), modelStudent.getSponsor(), modelStudent.getBirthDate(), null, new ContactDTO(modelStudent.getContact().getAddress()));
 
         Course course = courseRepository.findById(modelStudent.getCourseId()).get();
 

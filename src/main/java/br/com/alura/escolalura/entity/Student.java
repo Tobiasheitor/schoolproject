@@ -23,6 +23,7 @@ public class Student {
     @Id
     private ObjectId id;
     private String name;
+    private String sponsor;
     private LocalDate birthDate;
     private List<SubjectDTO> subjects;
     private ContactDTO contact;

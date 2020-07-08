@@ -17,17 +17,17 @@
 <div th:replace="layout/fragments :: menu"></div>
 
 <div class="container">
-	<h3 class="main-title center">Cadastrar Nota</h3>
-	<div class="row">
-		<form class="col s12" action="/note/save" method="post" id="myForm">
+    <h3 class="main-title center">Lançar Notas</h3>
+    <div class="row">
+        <form class="col s12" action="/note/save" method="post" id="myForm">
 
-			<div class="row">
-				<div class="input-field col s12">
-					<select id="select_course">
-						<option value="">Selecione o curso</option>
-						<option th:each="c : ${courses}" th:value="${c.id}" th:text="${c.name}">Wireframe</option>
-					</select>
-					<label>curso</label>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="select_course">
+                        <option value="">Selecione o curso</option>
+                        <option th:each="c : ${courses}" th:value="${c.id}" th:text="${c.name}">Wireframe</option>
+                    </select>
+                    <label>curso</label>
 				</div>
 			</div>
 

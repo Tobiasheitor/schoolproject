@@ -15,7 +15,8 @@ public class ModelStudent {
 
   private String name;
   private ObjectId courseId;
-  private ContactDTO contact;
+    private String sponsor;
+    private ContactDTO contact;
 
   @NotNull
   @DateTimeFormat(pattern = ProjectConstants.DATE_PATTERN)
