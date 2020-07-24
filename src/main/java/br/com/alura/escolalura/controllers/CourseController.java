@@ -19,8 +19,8 @@ import javax.validation.Valid;
 @Slf4j
 @Controller
 public class CourseController {
-
-    private static final String PAGE_REGISTER = "/course/register";
+    private static final String HOME_PAGE = "redirect:/";
+    private static final String PAGE_REGISTER = "course/register";
     private static final String GET_COURSE_STUDENTS = "course/{courseId}/students";
     private static final String SELECT_STUDENTS_FRAGMENT = "layout/fragments :: select_student";
 
@@ -54,7 +54,7 @@ public class CourseController {
         }
 
         log.info("Controller end - saved course: {}", newCourse);
-        return "redirect:/";
+        return HOME_PAGE;
     }
 
     @GetMapping(GET_COURSE_STUDENTS)
@@ -65,5 +65,4 @@ public class CourseController {
 
         return SELECT_STUDENTS_FRAGMENT;
     }
-
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 @Controller
 public class AdminController {
-	private static final String PAGE_CLOSURE = "/closure";
+	private static final String PAGE_CLOSURE = "closure";
 
 	@Autowired
 	private AdminServiceImpl adminService;
@@ -20,7 +20,7 @@ public class AdminController {
 		return "index";
 	}
 
-	@GetMapping(PAGE_CLOSURE)
+	@GetMapping("/closure")
 	public String closure(Model model) {
 
 		model.addAttribute("closure", adminService.getClosure());
