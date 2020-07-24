@@ -1,6 +1,6 @@
 # School program
 
-A simple program to manage students, teachers and others things.
+A simple program to manage students, teachers and other things.
 
 ### What was used to do?
 
