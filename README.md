@@ -22,3 +22,9 @@ Class diagram
 
 ![Alt](diagrams/class_diagram.png)
 
+## Run the application
+
+ - Install Java 8
+ - Download [MongoDB](https://www.mongodb.com/) and run in port 27017
+ - Open the terminal in the root project folder and type `java -jar schoolproject.jar`
+ - Open in your browser `http://localhost:8080/`
